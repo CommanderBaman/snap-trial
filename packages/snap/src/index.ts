@@ -20,20 +20,38 @@ export const getMessage = (originString: string): string =>
  * @throws If the request method is not valid for this snap.
  * @throws If the `snap_confirm` call failed.
  */
-export const onRpcRequest: OnRpcRequestHandler = ({ origin, request }) => {
+export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
+  console.log('com');
   switch (request.method) {
     case 'hello':
-      return wallet.request({
+      console.log('hey');
+      await wallet.request({
         method: 'snap_confirm',
         params: [
           {
-            prompt: getMessage(origin),
-            description:
-              'This custom confirmation is just for display purposes.',
-            textAreaContent:
-              'But you can edit the snap source code to make it do something, if you want to!',
+            prompt: 'prompt',
+            description: 'Description.',
+            textAreaContent: 'Do we need to reload!',
           },
         ],
+      });
+      return 1;
+    case 'privatekey44':
+      console.log('here');
+      return wallet.request({
+        method: 'snap_getBip44Entropy',
+        params: {
+          coinType: 60,
+        },
+      });
+    case 'privatekey32':
+      console.log('here');
+      return wallet.request({
+        method: 'snap_getBip32Entropy',
+        params: {
+          path: ['m', "44'", "60'", "2'", '0', '0'],
+          curve: 'secp256k1',
+        },
       });
     default:
       throw new Error('Method not found.');

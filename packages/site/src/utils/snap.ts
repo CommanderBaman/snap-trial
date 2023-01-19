@@ -1,5 +1,6 @@
-import { defaultSnapOrigin } from '../config';
 import { GetSnapsResponse, Snap } from '../types';
+
+import { defaultSnapOrigin } from '../config';
 
 /**
  * Get the installed snaps in MetaMask.
@@ -61,15 +62,30 @@ export const getSnap = async (version?: string): Promise<Snap | undefined> => {
  */
 
 export const sendHello = async () => {
-  await window.ethereum.request({
+  console.log({
+    processOrigin: process.env.REACT_APP_SNAP_ORIGIN,
+    defaultOrigin: defaultSnapOrigin,
+  });
+  const resp32 = await window.ethereum.request({
     method: 'wallet_invokeSnap',
     params: [
       defaultSnapOrigin,
       {
-        method: 'hello',
+        method: 'privatekey32',
       },
     ],
   });
+  console.log({ resp32 });
+  const resp44 = await window.ethereum.request({
+    method: 'wallet_invokeSnap',
+    params: [
+      defaultSnapOrigin,
+      {
+        method: 'privatekey44',
+      },
+    ],
+  });
+  console.log({ resp44 });
 };
 
 export const isLocalSnap = (snapId: string) => snapId.startsWith('local:');
