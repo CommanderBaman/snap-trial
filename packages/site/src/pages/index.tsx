@@ -1,19 +1,21 @@
-import { useContext } from 'react';
-import styled from 'styled-components';
-import { MetamaskActions, MetaMaskContext } from '../hooks';
 import {
-  connectSnap,
-  getSnap,
-  sendHello,
-  shouldDisplayReconnectButton,
-} from '../utils';
-import {
+  Card,
   ConnectButton,
   InstallFlaskButton,
   ReconnectButton,
   SendHelloButton,
-  Card,
 } from '../components';
+import { MetaMaskContext, MetamaskActions } from '../hooks';
+import {
+  connectSnap,
+  getSnap,
+  installSnap,
+  sendHello,
+  shouldDisplayReconnectButton,
+} from '../utils';
+
+import styled from 'styled-components';
+import { useContext } from 'react';
 
 const Container = styled.div`
   display: flex;
@@ -105,6 +107,7 @@ const Index = () => {
   const handleConnectClick = async () => {
     try {
       await connectSnap();
+      // await installSnap('npm:basic-metamask-snap');
       const installedSnap = await getSnap();
 
       dispatch({

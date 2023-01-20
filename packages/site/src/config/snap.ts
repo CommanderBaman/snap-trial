@@ -4,3 +4,4 @@
  */
 export const defaultSnapOrigin =
   process.env.REACT_APP_SNAP_ORIGIN ?? `local:http://localhost:8080`;
+// export const defaultSnapOrigin = 'npm:basic-metamask-snap';
