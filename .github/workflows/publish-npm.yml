@@ -13,8 +13,10 @@ jobs:
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
-      - run: ls
+      # to ensure snap is updated
+      - run: yarn build
         working-directory: ./packages/snap
+      # publish snap
       - run: npm publish
         working-directory: ./packages/snap
         env:
