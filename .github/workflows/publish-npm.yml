@@ -1,4 +1,4 @@
-name: Publish Package to npmjs
+name: Publish snap to npmjs
 on:
   release:
     types: [created]
@@ -13,7 +13,8 @@ jobs:
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
-      - run: yarn
-      - run: yarn publish
+      - run: ls
+      - run: cd packages/snap
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
