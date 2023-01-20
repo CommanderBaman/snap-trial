@@ -13,7 +13,9 @@ jobs:
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
-      # to ensure snap is updated
+      # to ensure snap manifest is updated, installing yarn and then building it
+      - run: yarn
+        working-directory: ./packages/snap
       - run: yarn build
         working-directory: ./packages/snap
       # publish snap
