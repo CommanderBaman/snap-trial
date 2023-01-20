@@ -20,7 +20,7 @@ jobs:
         working-directory: ./packages/snap
       # publish snap
       - uses: JS-DevTools/npm-publish@v1
-        working-directory: ./packages/snap
         with:
           token: ${{ secrets.NPM_TOKEN }}
+          package: ./packages/snap
 
