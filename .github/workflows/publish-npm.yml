@@ -13,9 +13,9 @@ jobs:
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
-      - run:
-        ls
-        npm publish
+      - run: ls
+        working-directory: ./packages/snap
+      - run: npm publish
         working-directory: ./packages/snap
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
